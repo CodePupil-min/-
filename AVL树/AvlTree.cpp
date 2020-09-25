@@ -49,7 +49,7 @@ int AvlTree::HightDiff(AvlTreeNode* root)
                     L           R      L          R    
                     |           |      |          |
                     1           2      3          4
-四种情况反别对应以上的四个数字，参数是S,旋转后的新根节点是S的左右子树
+四种情况分别对应以上的四个数字，参数是S,旋转后的新根节点是S的左右子树
 */
 AvlTreeNode* AvlTree::LeftRotate(AvlTreeNode* old_root)
 {
