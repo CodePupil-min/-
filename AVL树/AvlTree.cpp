@@ -42,45 +42,45 @@ int AvlTree::HightDiff(AvlTreeNode* root)
 {
 	return GetHeight(root->left) - GetHeight(root->right);
 }
-//Ğı×ª²Ù×÷ÖĞËùÓĞµÄ²ÎÊı¶¼ÊÇ´ı²åÈë×ÓÊ÷µÄ×æ¸¸½Úµã
+//æ—‹è½¬æ“ä½œä¸­æ‰€æœ‰çš„å‚æ•°éƒ½æ˜¯å¾…æ’å…¥å­æ ‘çš„ç¥–çˆ¶èŠ‚ç‚¹
 /*
                                    S
                           L                  R
                     L           R      L          R    
                     |           |      |          |
                     1           2      3          4
-ËÄÖÖÇé¿ö·´±ğ¶ÔÓ¦ÒÔÉÏµÄËÄ¸öÊı×Ö£¬²ÎÊıÊÇS,Ğı×ªºóµÄĞÂ¸ù½ÚµãÊÇSµÄ×óÓÒ×ÓÊ÷
+å››ç§æƒ…å†µååˆ«å¯¹åº”ä»¥ä¸Šçš„å››ä¸ªæ•°å­—ï¼Œå‚æ•°æ˜¯S,æ—‹è½¬åçš„æ–°æ ¹èŠ‚ç‚¹æ˜¯Sçš„å·¦å³å­æ ‘
 */
 AvlTreeNode* AvlTree::LeftRotate(AvlTreeNode* old_root)
 {
-	//×ª¹ıÀ´
+	//è½¬è¿‡æ¥
 	AvlTreeNode* new_root = old_root->right;
 	AvlTreeNode* left_child = new_root->left;
 	new_root->left = old_root;
 	old_root->right = left_child;
-	//¸üĞÂold_root¸ß¶È
+	//æ›´æ–°old_rooté«˜åº¦
 	old_root->Height = max(GetHeight(old_root->left), GetHeight(old_root->right)) + 1;
 
 	//new_root->Height = max(GetHeight(new_root->left), GetHeight(new_root->right)) + 1;
-	//·µ»ØĞÂ¸ù½Úµã
+	//è¿”å›æ–°æ ¹èŠ‚ç‚¹
 	return new_root;
 }
 AvlTreeNode* AvlTree::RightRotate(AvlTreeNode* old_root)
 {
-	//×ª¹ıÀ´
+	//è½¬è¿‡æ¥
 	AvlTreeNode* new_root = old_root->left;
 	AvlTreeNode* right_child = new_root->right;
 	new_root->right = old_root;
 	old_root->left = right_child;
-	//¸üĞÂold_root¸ß¶È
+	//æ›´æ–°old_rooté«˜åº¦
 	old_root->Height = max(GetHeight(old_root->left), GetHeight(old_root->right)) + 1;
 	//new_root->Height = max(GetHeight(new_root->left), GetHeight(new_root->right)) + 1;
-	//·µ»ØĞÂ¸ù½Úµã
+	//è¿”å›æ–°æ ¹èŠ‚ç‚¹
 	return new_root;
 }
 AvlTreeNode* AvlTree::LeftRightRotate(AvlTreeNode* old_root)
 {
-	//ÏÈ×óĞıÆäÓÒº¢×Ó£¬ÔÙÓÒĞıÆä±¾Éí
+	//å…ˆå·¦æ—‹å…¶å³å­©å­ï¼Œå†å³æ—‹å…¶æœ¬èº«
 	old_root->left = LeftRotate(old_root->left);
 	AvlTreeNode* new_root = RightRotate(old_root);
 	return new_root;
@@ -93,17 +93,17 @@ AvlTreeNode* AvlTree::RightLeftRotate(AvlTreeNode* old_root)
 }
 AvlTreeNode* AvlTree::InsertNode(AvlTreeNode* root, AvlTreeNode* new_node)
 {
-	//´«½øÀ´¿ÕµØÖ·Ö±½Ó·µ»ØĞÂ½Úµã
+	//ä¼ è¿›æ¥ç©ºåœ°å€ç›´æ¥è¿”å›æ–°èŠ‚ç‚¹
 	if (root == NULL)
 		return new_node;
-	//Ò»ÑùµÄÔªËØÖ±½Ó·µ»ØÔ­À´µÄroot
+	//ä¸€æ ·çš„å…ƒç´ ç›´æ¥è¿”å›åŸæ¥çš„root
 	if (IsSame(&root->item, &new_node->item))
 	{
 		delete new_node;
 		this->size--;
 		return root;
 	}
-	//Ïò×ó²åÈë
+	//å‘å·¦æ’å…¥
 	if (ToLeft(&root->item, &new_node->item))
 	{
 			root->left=InsertNode(root->left, new_node);
@@ -112,14 +112,14 @@ AvlTreeNode* AvlTree::InsertNode(AvlTreeNode* root, AvlTreeNode* new_node)
 	{
 			root->right=InsertNode(root->right, new_node);
 	}
-	//Òª½øÈëÒÔÏÂ´úÂë£¬ĞÂ²åÈëµÄ½ÚµãÒ»¶¨ÔÚrootµÄËï×Ó½Úµã»òÕßÒÔÏÂ
-	//×ó±ß¸ßÓÚÓÒ±ß
+	//è¦è¿›å…¥ä»¥ä¸‹ä»£ç ï¼Œæ–°æ’å…¥çš„èŠ‚ç‚¹ä¸€å®šåœ¨rootçš„å­™å­èŠ‚ç‚¹æˆ–è€…ä»¥ä¸‹
+	//å·¦è¾¹é«˜äºå³è¾¹
 	if (HightDiff(root) > 1)
 	{
-		//Èç¹û¼ÌĞøÏò×ó×ß¶Ôroot½øĞĞÓÒĞı
+		//å¦‚æœç»§ç»­å‘å·¦èµ°å¯¹rootè¿›è¡Œå³æ—‹
 		if (ToLeft(&root->left->item, &new_node->item))
 			root = RightRotate(root);
-		//ÏòÓÒ×ß¾ÍÏÈ×óĞıÔÙÓÒĞı
+		//å‘å³èµ°å°±å…ˆå·¦æ—‹å†å³æ—‹
 		else 
 			root = LeftRightRotate(root);
 	}
@@ -130,10 +130,10 @@ AvlTreeNode* AvlTree::InsertNode(AvlTreeNode* root, AvlTreeNode* new_node)
 		else
 			root = RightLeftRotate(root);
 	}
-	//¸üĞÂĞı×ªºóµÄĞÂ¸ù½ÚµãµÄ¸ß¶È
-	//Èç¹ûÃ»ÓĞĞı×ªÔòÔÚ²åÈëºó¸üĞÂ¸¸½ÚµãµÄ¸ß¶È
+	//æ›´æ–°æ—‹è½¬åçš„æ–°æ ¹èŠ‚ç‚¹çš„é«˜åº¦
+	//å¦‚æœæ²¡æœ‰æ—‹è½¬åˆ™åœ¨æ’å…¥åæ›´æ–°çˆ¶èŠ‚ç‚¹çš„é«˜åº¦
 	root->Height = max(GetHeight(root->left), GetHeight(root->right)) + 1;
-	return root;//·µ»Ø¸ù½Úµã
+	return root;//è¿”å›æ ¹èŠ‚ç‚¹
 }
 AvlTreeNode* AvlTree::DeleteNode(AvlTreeNode* root,const Item* item)
 {
@@ -149,7 +149,7 @@ AvlTreeNode* AvlTree::DeleteNode(AvlTreeNode* root,const Item* item)
 			this->size--;
 			return root;
 		}
-		//×ó×ÓÊ÷´æÔÚ£¬´ÓÓÒ×ÓÊ÷µÄ×ó×ÓÊ÷Ò»Ö±ÏòÏÂÕÒµ½×îºóÒ»¸ö½øĞĞÌæ»»
+		//å·¦å­æ ‘å­˜åœ¨ï¼Œä»å³å­æ ‘çš„å·¦å­æ ‘ä¸€ç›´å‘ä¸‹æ‰¾åˆ°æœ€åä¸€ä¸ªè¿›è¡Œæ›¿æ¢
 		else
 		{
 			AvlTreeNode* temp = root->left;
@@ -163,33 +163,33 @@ AvlTreeNode* AvlTree::DeleteNode(AvlTreeNode* root,const Item* item)
 		root->left= DeleteNode(root->left,item);
 	else if(ToRight(&root->item, item))
 		root->right = DeleteNode(root->right, item);
-	//É¾³ıºó
-	//É¾³ı½ÚµãÔÚÓÒ×ÓÊ÷ÉÏ
+	//åˆ é™¤å
+	//åˆ é™¤èŠ‚ç‚¹åœ¨å³å­æ ‘ä¸Š
 	if (HightDiff(root) > 1)
 	{
-		//±È½Ï×ó×ÓÊ÷µÄ×ÓÊ÷¸ß¶È
-		//×ó±ß¸ßÒ»µãÖ±½ÓÓÒĞı
+		//æ¯”è¾ƒå·¦å­æ ‘çš„å­æ ‘é«˜åº¦
+		//å·¦è¾¹é«˜ä¸€ç‚¹ç›´æ¥å³æ—‹
 		if (HightDiff(root->left)>=0)
 			root = RightRotate(root);
-		//ÓÒ±ß¸ßÒ»µã¾ÍÏÈ×óĞıÔÙÓÒĞı
+		//å³è¾¹é«˜ä¸€ç‚¹å°±å…ˆå·¦æ—‹å†å³æ—‹
 		else
 			root = LeftRightRotate(root);
 	}
-	//É¾³ı½ÚµãÔÚ×ó×ÓÊ÷ÉÏ
+	//åˆ é™¤èŠ‚ç‚¹åœ¨å·¦å­æ ‘ä¸Š
 	else if (HightDiff(root) < -1)
 	{
-		//±È½ÏÓÒ×ÓÊ÷µÄ×ÓÊ÷¸ß¶È
-		//ÓÒ±ß¸ßÒ»µãÖ±½Ó×óĞı
+		//æ¯”è¾ƒå³å­æ ‘çš„å­æ ‘é«˜åº¦
+		//å³è¾¹é«˜ä¸€ç‚¹ç›´æ¥å·¦æ—‹
 		if (HightDiff(root->right) <= 0)
 			root = LeftRotate(root);
-		//×ó±ß¸ßÒ»µã¾ÍÏÈÓÒĞıÔÙ×óĞı
+		//å·¦è¾¹é«˜ä¸€ç‚¹å°±å…ˆå³æ—‹å†å·¦æ—‹
 		else
 			root = RightLeftRotate(root);
 	}
-	//¸üĞÂĞı×ªºóµÄĞÂ¸ù½ÚµãµÄ¸ß¶È
-	//Èç¹ûÃ»ÓĞĞı×ªÔòÔÚÉ¾³ıºó¸üĞÂ¸¸½ÚµãµÄ¸ß¶È
+	//æ›´æ–°æ—‹è½¬åçš„æ–°æ ¹èŠ‚ç‚¹çš„é«˜åº¦
+	//å¦‚æœæ²¡æœ‰æ—‹è½¬åˆ™åœ¨åˆ é™¤åæ›´æ–°çˆ¶èŠ‚ç‚¹çš„é«˜åº¦
 	root->Height = max(GetHeight(root->left), GetHeight(root->right)) + 1;
-	return root;//·µ»Ø¸ù½Úµã
+	return root;//è¿”å›æ ¹èŠ‚ç‚¹
 }
 AvlTreeNode* AvlTree::SeekNode(const Item* item)
 {
@@ -228,7 +228,7 @@ void AvlTree::PostorderTraversalPrint(AvlTreeNode* root)
 	PostorderTraversalPrint(root->right);
 	cout << root->item.x << "(" << root->Height << ")\t";
 }
-//Íâ²¿½Ó¿Ú
+//å¤–éƒ¨æ¥å£
 bool AvlTree::InsertItem(const Item* item)
 {
 	AvlTreeNode* new_node = new AvlTreeNode(item);
@@ -261,5 +261,5 @@ bool AvlTree::IsEmpty(const Item* item)
 	return false;
 }
 void AvlTree::PreorderTraversalPrint(){ PreorderTraversalPrint(tree_root); }
-void AvlTree::InorderTraversalPrint() { InorderTraversalPrint(tree_root); }//ÖĞĞò
+void AvlTree::InorderTraversalPrint() { InorderTraversalPrint(tree_root); }//ä¸­åº
 void AvlTree::PostorderTraversalPrint() { PostorderTraversalPrint(tree_root); }
