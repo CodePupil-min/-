@@ -11,9 +11,9 @@ void sort::print() {
         cout << DATA[i] << "\t";
 }
 
-//²åÈëÅÅĞò
+//æ’å…¥æ’åº
 void sort::insert_sort() {
-    int j, key;//key´æ´¢Ã¿´ÎÒª²åÈëÓĞĞòÁĞµÄÊı¾İÖµ
+    int j, key;//keyå­˜å‚¨æ¯æ¬¡è¦æ’å…¥æœ‰åºåˆ—çš„æ•°æ®å€¼
     for (int i = 1; i < SIZE; i++) {
         key = DATA[i]; 
         j = i-1;
@@ -26,11 +26,11 @@ void sort::insert_sort() {
     }
 }
 
-//Ï£¶ûÅÅĞò
+//å¸Œå°”æ’åº
 void sort::shell_sort() {
-    int j, key, k;//s[k]Ö¸Ï£¶ûÅÅĞòµÄÔöÁ¿
-    int s[] = { 109,41,19,5,1 };//ÔöÁ¿ĞòÁĞ
-    for (k = 0; s[k] >= SIZE; k++);//ÕÒµ½ÊÊºÏ´ıÅÅĞòÊı×éµÄ×î´óÔöÁ¿
+    int j, key, k;//s[k]æŒ‡å¸Œå°”æ’åºçš„å¢é‡
+    int s[] = { 109,41,19,5,1 };//å¢é‡åºåˆ—
+    for (k = 0; s[k] >= SIZE; k++);//æ‰¾åˆ°é€‚åˆå¾…æ’åºæ•°ç»„çš„æœ€å¤§å¢é‡
     while (k < 5) {
         for (int i = s[k] + 1; i < SIZE; i++) {
             key = DATA[i];
@@ -46,7 +46,7 @@ void sort::shell_sort() {
     }
 }
 
-//Ñ¡ÔñÅÅĞò
+//é€‰æ‹©æ’åº
 void sort::select_sort() {
     int i, j, k;
     int temp;
@@ -62,7 +62,7 @@ void sort::select_sort() {
     }
 }
 
-//Ã°ÅİÅÅĞò
+//å†’æ³¡æ’åº
 void sort::bubble_sort() {
     bool flog;
     for (int i = 0; i < SIZE; i++) {
@@ -72,11 +72,11 @@ void sort::bubble_sort() {
                 swap(DATA[j], DATA[j + 1]);
                 flog = false;
             }
-        if (flog)break;//¼ì²âµ½ÓĞÒ»´ÎÃ»½øĞĞ½»»»ÔòËµÃ÷ÒÑ¾­ÓĞĞò
+        if (flog)break;//æ£€æµ‹åˆ°æœ‰ä¸€æ¬¡æ²¡è¿›è¡Œäº¤æ¢åˆ™è¯´æ˜å·²ç»æœ‰åº
     }
 }
 
-//¹é²¢ÅÅĞò 
+//å½’å¹¶æ’åº 
 void sort::merge_sort() { Merge_sort(0, SIZE - 1); }
 void sort::Merge_sort(int left, int right) {
     int center = (left + right) / 2;
@@ -87,7 +87,7 @@ void sort::Merge_sort(int left, int right) {
     }
 }
 void sort::merge(int left, int center, int right) {
-    vector<int>D(SIZE);//´æºÏ²¢ºóµÄĞòÁĞ
+    vector<int>D(SIZE);//å­˜åˆå¹¶åçš„åºåˆ—
     int i = left, j = center + 1, k = left;
     while (i <= center && j <= right) {
         if (DATA[i] < DATA[j])D[k++] = DATA[i++];
@@ -96,28 +96,28 @@ void sort::merge(int left, int center, int right) {
     while (i <= center)D[k++] = DATA[i++];
     while (j <= right)D[k++] = DATA[j++];
     for (k = left; k <= right; k++)
-        DATA[k] = D[k];//½«Êı¾İ´æ»ØÔ­Êı×é
+        DATA[k] = D[k];//å°†æ•°æ®å­˜å›åŸæ•°ç»„
 }
 
-//¿ìËÙÅÅĞò
+//å¿«é€Ÿæ’åº
 void sort::quick_sort() { Quick_sort(0, SIZE - 1); }
 void sort::Quick_sort(int left, int right){
-    //µ±Ö»Ê£Ò»¸öÔªËØÊ±ÍË³öµİ¹é
+    //å½“åªå‰©ä¸€ä¸ªå…ƒç´ æ—¶é€€å‡ºé€’å½’
     if (left >= right)return;
     int i = left, j = right;
     int base = DATA[right];
     while (i < j) {
-        //Èô½«»ù×¼µã·ÅÔÚ×îÓÒ±ßÔò´Ó×ó±ß(i)¿ªÊ¼£¬ÈôÔÚ×ó±ß£¬Ôò´ÓÓÒ±ß(j)¿ªÊ¼
+        //è‹¥å°†åŸºå‡†ç‚¹æ”¾åœ¨æœ€å³è¾¹åˆ™ä»å·¦è¾¹(i)å¼€å§‹ï¼Œè‹¥åœ¨å·¦è¾¹ï¼Œåˆ™ä»å³è¾¹(j)å¼€å§‹
         while ((i < j) && (DATA[i] <= base))i++;
         while ((i < j) && (DATA[j] >= base))j--;
-        //ÕÒµ½×ó±ß´óÓÚ»ù×¼ºÍÓÒ±ßĞ¡ÓÚ»ù×¼µÄ½øĞĞ½»»»
+        //æ‰¾åˆ°å·¦è¾¹å¤§äºåŸºå‡†å’Œå³è¾¹å°äºåŸºå‡†çš„è¿›è¡Œäº¤æ¢
         if (i < j)swap(DATA[i], DATA[j]);
     }
-    //i(j)Î»ÖÃµÄÊı¾İ·Åµ½Ô­»ù×¼´¦
+    //i(j)ä½ç½®çš„æ•°æ®æ”¾åˆ°åŸåŸºå‡†å¤„
     DATA[right] = DATA[j];
-    //½«»ù×¼×îºó·Å»Øµ½i»òjµÄÎ»ÖÃ(×îºói=j)
+    //å°†åŸºå‡†æœ€åæ”¾å›åˆ°iæˆ–jçš„ä½ç½®(æœ€åi=j)
     DATA[j] = base;
-    //×óÓÒ×ÓĞòÁĞµİ¹é
+    //å·¦å³å­åºåˆ—é€’å½’
     Quick_sort(left, j - 1);
     Quick_sort(j + 1, right);
 }
