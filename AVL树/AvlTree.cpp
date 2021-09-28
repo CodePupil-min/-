@@ -49,7 +49,7 @@ int AvlTree::HightDiff(AvlTreeNode* root)
                     L           R      L          R    
                     |           |      |          |
                     1           2      3          4
-四种情况分别对应以上的四个数字，参数是S,旋转后的新根节点是S的左右子树
+四种情况反别对应以上的四个数字，参数是S,旋转后的新根节点是S的左右子树
 */
 AvlTreeNode* AvlTree::LeftRotate(AvlTreeNode* old_root)
 {
@@ -229,6 +229,7 @@ void AvlTree::PostorderTraversalPrint(AvlTreeNode* root)
 	cout << root->item.x << "(" << root->Height << ")\t";
 }
 //外部接口
+int AvlTree::GetSize() { return this->size; }
 bool AvlTree::InsertItem(const Item* item)
 {
 	AvlTreeNode* new_node = new AvlTreeNode(item);
@@ -254,7 +255,7 @@ bool AvlTree::IsExist(const Item* item)
 	else
 		return false;
 }
-bool AvlTree::IsEmpty(const Item* item)
+bool AvlTree::IsEmpty()
 {
 	if (tree_root == NULL)
 		return true;

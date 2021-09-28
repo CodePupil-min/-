@@ -1,5 +1,4 @@
 //Avl树
-//2020/9/25
 #pragma once
 #ifndef AVLTREE_H_
 #define AVLTREE_H_
@@ -47,9 +46,10 @@ private:
 	void PostorderTraversalPrint(AvlTreeNode*);//后序
 public:
 	AvlTree();
+	int GetSize();
 	bool InsertItem(const Item*);//插入元素
 	bool IsExist(const Item*);//元素是否存在
-	bool IsEmpty(const Item*);//是否空树
+	bool IsEmpty();//是否空树
 	bool DeleteItem(const Item*);//删除元素
 	void PreorderTraversalPrint();//先序遍历
 	void InorderTraversalPrint();//中序
