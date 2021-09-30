@@ -64,15 +64,15 @@ void sort::select_sort() {
 
 //冒泡排序
 void sort::bubble_sort() {
-    bool flog;
+    bool flag;
     for (int i = 0; i < SIZE; i++) {
-        flog = true;
+        flag = true;
         for (int j = 0; j < SIZE - 1 - i; j++)
             if (DATA[j] > DATA[j + 1]) {
                 swap(DATA[j], DATA[j + 1]);
-                flog = false;
+                flag = false;
             }
-        if (flog)break;//检测到有一次没进行交换则说明已经有序
+        if (flag)break;//检测到有一次没进行交换则说明已经有序
     }
 }
 
