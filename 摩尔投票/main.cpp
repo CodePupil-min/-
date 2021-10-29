@@ -12,7 +12,7 @@ int main()
 		if (x == -1)break;
 		nums.push_back(x);
 	}
-	for (int x : nums)cout << x << '\t';
+	for (int x : nums)cout << x << "  ";
 	cout << "\n选超过1/n的元素，输入n：";
 	cin >> x;
 	vector<int>res;
@@ -22,6 +22,6 @@ int main()
 		res = Vote(nums, x);
 	cout << "结果：";
 	for (int x : res)
-		cout << x << '\t';
+		cout << x << "  ";
 	return 0;
 }

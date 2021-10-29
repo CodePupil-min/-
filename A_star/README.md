@@ -15,13 +15,13 @@
 5. 在另外一个极端情况下，如果h(n)相较于g(n)大很多，则此时只有h(n)产生效果，这也就变成了最佳优先搜索。
 ## 关于几种距离：
 + __曼哈顿距离__(Manhattan distance)  
-四个方向的运动  $$distance=(dis_x+dis_y)*D$$
+四个方向的运动  $$ distance=(dis_x+dis_y)*D $$
 + __对角距离__  
 八个方向的运动  
-$$distance=(dis_x+dis_y)*D+(\sqrt{2}D-2*D)*min(dis_x,dis_y)$$
+$$ distance=(dis_x+dis_y)*D+(\sqrt{2}D-2*D)*min(dis_x,dis_y) $$
 + __欧几里得距离__  
 任意方向的运动  
-$$distance=\sqrt{(dis_x)^2+(dis_y)^2}$$
+$$ distance=\sqrt{(dis_x)^2+(dis_y)^2} $$
 ## 伪代码
 ~~~
 初始化open_set、close_set；
