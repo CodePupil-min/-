@@ -1,5 +1,6 @@
 #include "BTree.h"
 
+//前中后遍历
 //循环
 //前序 中->左->右
 vector<int> BTree::preorderTraversal(TreeNode* root)
@@ -43,7 +44,7 @@ vector<int> BTree::inorderTraversal(TreeNode* root)
 	return list;
 }
 //后序 左->右->中
-//中->右->左  逆序-》  左->右->中 
+//中->右->左  逆序  左->右->中 
 vector<int> BTree::postorderTraversal(TreeNode* root)
 {
 	vector<int>list;
@@ -102,4 +103,60 @@ void BTree::postorder(TreeNode* root, vector<int>& list)
 	postorder(root->left, list);
 	postorder(root->right, list);
 	list.push_back(root->val);
+}
+//层序遍历
+//用队列实现
+vector<vector<int>> BTree::levelOrder(TreeNode* root) {
+	queue<TreeNode*> q;
+	vector<vector<int>>list;
+	if (root == nullptr) return list;
+	q.push(root);
+	while (!q.empty()) {
+		int len = q.size();
+		vector<int>v;
+		TreeNode* node;
+		for (int i = 0; i < len; i++) {
+			node = q.front();
+			v.push_back(node->val);
+			if (node->left != nullptr)
+				q.push(node->left);
+			if (node->right != nullptr)
+				q.push(node->right);
+			q.pop();
+		}
+		list.push_back(v);
+	}
+	return list;
+}
+
+//求最大深度
+//递归
+int BTree::maxDepthR(TreeNode* root) 
+{
+	if (root == nullptr)return 0;
+	int l = maxDepthR(root->left);
+	int r = maxDepthR(root->right);
+	return l > r ? l + 1 : r + 1;
+}
+//迭代（层序遍历）
+int BTree::maxDepthT(TreeNode* root)
+{
+	queue<TreeNode*> q;
+	if (root == nullptr) return 0;
+	int res = 0;
+	q.push(root);
+	while (!q.empty()) {
+		int len = q.size();
+		res += 1;
+		TreeNode* node;
+		for (int i = 0; i < len; i++) {
+			node = q.front();
+			if (node->left != nullptr)
+				q.push(node->left);
+			if (node->right != nullptr)
+				q.push(node->right);
+			q.pop();
+		}
+	}
+	return res;
 }
